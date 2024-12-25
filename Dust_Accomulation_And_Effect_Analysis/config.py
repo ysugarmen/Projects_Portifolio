@@ -1,0 +1,51 @@
+import numpy as np
+from scipy.constants import g, R
+
+EPSILON_0 = 8.85e-12  # Absolute permittivity of air in F/m
+XI = -7e-6  # Specific charge in C/g
+PV_EFF = 0.015  # PV efficiency fitting factor
+AIR_DENSITY = 1.225  # kg/m^3
+VISCOSITY_AIR = 1.81e-5  # Pa.s
+PARTICLE_DENSITY = 2500  # kg/m^3 for typical dust particles
+TEMP = 298.15  # K
+V0 = 1.8e-5  # m^3 / mol (molar volume of water at room temperature)
+Rg = R  # J/(K*mol), gas constant
+H1 = 6e-20  # J, Hamaker constant in air
+H2 = 3e-20  # J, Hamaker constant in water
+em = 0.4  # nm, equivalent thickness of saturated adsorption of monolayer water molecules
+Cb = 1.2  # BET coefficient
+a = 0.1  # nm, distance between surfaces
+v1 = 0.3  # Poisson's ratio of the particle
+E1 = 70  # GPa, Young's modulus of the particle
+v2 = 0.3  # Poisson's ratio of the PV panel
+E2 = 70  # GPa, Young's modulus of the PV panel
+M = 1  # kg, mass of the PV panel
+Ep = 0.01  # J, example value for particle kinetic energy before collision
+#mu = 0.162
+mu = 0.5 
+PHI = 0
+PARTICLE_SIZES = np.array([10, 20, 30])*1e-6
+DUST_PARTICLE_DENSITY = 2500
+PARTICLE_RADIOS = PARTICLE_SIZES / 2
+PARTICLE_MASSES = (4/3) * np.pi * DUST_PARTICLE_DENSITY * (PARTICLE_RADIOS**3)
+# Create a dictionary mapping each size to its mass
+PARTICLE_MASSES_DICT = dict(zip(PARTICLE_SIZES, PARTICLE_MASSES))
+#WIND_SPEEDS = np.linspace(5, 7, 100)  # m/s
+#HUMIDITIES = np.linspace(0, 10, 100)  # %
+WIND_SPEEDS = [5, 10, 15, 20]
+HUMIDITIES = [0.5, 0.6, 0.7]
+DRAG_AF = 1.2
+BUOYANCY_AF = 0.9
+TILT_ANGLES = np.array([80, 75, 70, 65, 60, 50, 40, 30, 20, 15, 10, 5, 0])  # deg
+NUM_OF_PARTICLES = 10000
+INITIAL_REFLECTIVITIES = {angle: np.random.uniform(92, 94) / 100 for angle in TILT_ANGLES}  # Initial reflectivities between 92% and 94%
+REDUCTION_COEFFICIENT = 0.008  # Reflectivity reduction per unit of dust
+CLEAN_MIRROR_REF_VAL = 94
+AUG23_STARTING_DATE = '2023-08-01'
+AUG23_ENDING_DATE = '2023-08-26'
+AUG23_REF_DIR = r"/Users/yonatansugarmen/Desktop/Final Project/Data files/August23_data/Reflectivity data"
+AUG23_ENV_DIR = r"/Users/yonatansugarmen/Desktop/Final Project/Data files/August23_data"
+AUG23_MIRROR_NAME = 'N-9'
+AUG23_WIND_DATA_FILE = r"/Users/yonatansugarmen/Desktop/Final Project/Data files/August23_data/AvgWindSpeed.csv"
+AUG23_TEMP_DATA_FILE = r"/Users/yonatansugarmen/Desktop/Final Project/Data files/August23_data/AvgTemp.csv"
+AUG23_HUMIDITY_DATA_FILE = r"/Users/yonatansugarmen/Desktop/Final Project/Data files/August23_data/AvgHumidity.csv"
